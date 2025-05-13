@@ -1,0 +1,144 @@
+<div class="card shadow">
+    <div class="card-header text-white py-3">
+        <h3 class="mb-0 font-lg text-white">
+            <i class="fa {{ addMode() ? 'fa-plus-circle' : 'fa-edit'}}"></i>
+            {{addMode() ? 'Add New Vehicle' : 'Edit Vehicle' }}
+        </h3>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="addVehicleForm" (ngSubmit)="onSubmit(addVehicleForm)">
+            <div class="row mb-3 width-input m-auto g-3">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="make" class="form-label">
+                            <i class="fa fa-industry"></i> Make
+                        </label>
+                        <input type="text" id="make" formControlName="make" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="model" class="form-label">
+                            <i class="fa fa-cogs"></i> Model
+                        </label>
+                        <input type="string" id="mode" formControlName="model" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group mb-3 m-auto">
+                        <label class="form-label" for="fuelType">
+                            <i class="fa fa-list"></i> Category
+                        </label>
+                        <select class="form-control" id="fuelType" formControlName="vehicleCategoryID">
+                            <option value="" selected disabled hidden>-- Select vehicle category</option>
+                            <option *ngFor="let category of categories" [value]="category.id">
+                                {{ category.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="features" class="form-label">
+                            <i class="fa fa-wrench"></i> Features
+                        </label>
+                        <input type="text" id="features" formControlName="features" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="year" class="form-label">
+                            <i class="fa fa-calendar-alt"></i> Year
+                        </label>
+                        <input type="number" id="year" formControlName="year" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="mileage" class="form-label">
+                            <i class="fa fa-tachometer-alt"></i> Mile age
+                        </label>
+                        <input type="number" id="mileage" formControlName="mileage" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="plateNumber" class="form-label">
+                            <i class="fa fa-car"></i> Plate Number
+                        </label>
+                        <input type="text" id="plateNumber" formControlName="plateNumber" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="price" class="form-label">
+                            <i class="fa fa-dollar-sign"></i> Price Per Day
+                        </label>
+                        <input type="number" id="price" formControlName="rentalPricePerDay" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label for="isAvailableForRent" class="form-label">
+                            <i class="fa fa-car-side"></i> Available For Rent
+                        </label>
+                        <select id="isAvailableForRent" class="form-control" formControlName="isAvailableForRent">
+                            <option [ngValue]="true">Available</option>
+                            <option [ngValue]="false">Not Available</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group mb-3 m-auto">
+                        <label class="form-label" for="fuelType">
+                            <i class="fa fa-list"></i> Fuel Type
+                        </label>
+                        <select class="form-control" id="fuelType" formControlName="fuelTypeID">
+                            <option value="" disabled selected hidden>-- Please select a fuel type</option>
+                            <option *ngFor="let type of FuelType" [value]="type.id">
+                                {{ type.fuelType }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3 width-input m-auto">
+                <label class="form-label">
+                    <i class="fa fa-image"></i> Vehicle Image
+                </label>
+                <div class="custom-dropzone" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+                    (drop)="onDrop($event)">
+                    <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" class="file-input">
+
+                    <div class="dropzone-content">
+                        <div class="upload-prompt" *ngIf="previewUrls.length === 0">
+                            <i class="fa fa-cloud-upload fa-2x mb-2"></i>
+                            <p>Drag and drop images here or click to upload</p>
+                        </div>
+                        <div class="image-preview-container" *ngIf="previewUrls.length > 0">
+                            <div class="image-preview" *ngFor="let url of previewUrls; let i = index">
+                                <img [src]="url" alt="Preview" class="object-fit-contain">
+                                <button type="button" class="remove-btn" (click)="onRemove(i)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 width-input m-auto">
+                <button class="btn btn-secondary" (click)="resetForm()">
+                    <i class="fa fa-undo"></i> Reset Form
+                </button>
+                <button type="submit" class="btn btn-success" [disabled]="addVehicleForm.invalid">
+                    <i class="fa fa-save"></i> {{addMode() ? 'Add Vehicle' : 'Update Vehicle'}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

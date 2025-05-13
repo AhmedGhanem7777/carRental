@@ -1,0 +1,123 @@
+<div class="filters-container">
+    <div class="row justify-content-between align-items-center">
+        <div class="col-md-4">
+            <div class="title">
+                <h1 class="font-xl font-bold text-center">Fuel Types Table</h1>
+            </div>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search for a fuel using name"
+                    [(ngModel)]="searchInput">
+            </div>
+            <div class="btn-add-vehicle">
+                <button class="btn btn-primary" (click)="addNewFuel()">Add Fuel Type</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-4 d-none d-md-block">
+        <table class="table table-hover">
+            <thead>
+                <tr class="text-center">
+                    <th class="font-md font-simibold text-white">Fuel ID</th>
+                    <th class="font-md font-simibold text-white">Fuel Name</th>
+                    <th class="font-md font-simibold text-white">Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="isLoading">
+                <tr>
+                    <td colspan="5" class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2 font-simibold font-lg">Loading Fuel Types . . .</p>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- <ng-container *ngIf="(fuelTypes | searchVehicle:searchInput).length > 0"> -->
+                <tbody *ngIf="!isLoading">
+                    <tr class="fuelType-row text-center" *ngFor="let type of fuelTypes | searchFuelType:searchInput">
+                        <td>{{type.id}}</td>
+                        <td>{{type.fuelType}}</td>
+                        <td>
+                            <button class="me-2 btn btn-outline-success" (click)="editFuel(type)">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button class="me-2 btn btn-outline-danger" (click)="deleteFuelType(type.id)">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            <!-- </ng-container> -->
+        </table>
+    </div>
+
+    <div class="d-block d-md-none">
+        <div *ngIf="isLoading" class="text-center py-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading Fuel Types . . .</p>
+        </div>
+
+        <div *ngIf="!isLoading">
+            <div class="fuelType-card" *ngFor="let type of fuelTypes | searchVehicle:searchInput">
+                <div class="fuelType-card-header d-flex align-items-center">
+                    <span class="fuelType-id text-white font-bold">{{ type.id }}</span>
+                </div>
+                <div class="fuelType-card-body">
+                    <div class="fuelType-info">
+                        <p><i class="fa-solid fa-id-card"></i>Name: {{ type.fuelType }}</p>
+                    </div>
+                    <div class="fuelType-actions d-flex justify-content-between align-items-center">
+                        <button class="btn btn-sm btn-outline-success me-2" (click)="editFuel(type)">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger me-2" (click)="deleteFuelType(type.id)">
+                            <i class="fas fa-eye"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="custom-modal" *ngIf="showModal">
+        <div class="modal-backdrop" (click)="closeModal()"></div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-simibold font-lg">{{isUpdateMode ? 'Update' : 'Add'}} Fuel Type</h5>
+                    <button type="button" class="btn-close" (click)="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="fuelForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group mb-3">
+                            <label for="fuelName" class="form-label">
+                                <i class="fa-solid fa-tag me-2"></i>Fuel Name
+                            </label>
+                            <input type="text" id="fuelName" formControlName="fuelType" class="form-control"
+                                [class.is-invalid]="fuelForm.get('fuelType')?.invalid && fuelForm.get('fuelType')?.touched"
+                                placeholder="Enter Fuel Type">
+                            <div class="invalid-feedback"
+                                *ngIf="fuelForm.get('fuelType')?.invalid && fuelForm.get('fuelType')?.touched">
+                                Fuel name is required
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary me-2" (click)="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="fuelForm.invalid || isSubmitting"
+                        (click)="onSubmit()">
+                        <span class="spinner-border spinner-border-sm me-2" *ngIf="isSubmitting"></span>
+                        {{isSubmitting ? (isUpdateMode ? 'Updating...' : 'Adding...') : (isUpdateMode ? 'Update Fuel' : 'Add Fuel')}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

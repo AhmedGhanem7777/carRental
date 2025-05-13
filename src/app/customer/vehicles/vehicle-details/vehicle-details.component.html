@@ -1,0 +1,72 @@
+<app-navbar [navbarBg]="true"></app-navbar>
+<section>
+    <div *ngIf="_IsLoadingService.isLoading()" class="col-12 text-center">
+        <app-loading></app-loading>
+    </div>
+    <div *ngIf="!_IsLoadingService.isLoading()" class="vehicle-details-container">
+        <div class="container pt-5" *ngIf="!isLoading">
+            <h2 class="text-center font-xxl font-bold mb-5">Vehicle Details</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4" *ngIf="vehicleData">
+                    <div class="gallery-container">
+                        <div class="main-image-container">
+                            <img [src]="vehicleData.imagePath" class="main-room-image" [alt]="vehicleData.vehicleID">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="vehicleData">
+                    <div class="room-info fade-in">
+                        <div class="d-flex justify-content-between position-relative mb-3">
+                            <app-go-back></app-go-back>
+                            <h3 class="room-title" *ngIf="vehicleData.categoryName">
+                                {{vehicleData.categoryName}}
+                            </h3>
+                        </div>
+
+                        <p class="description mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
+                            cum
+                            animi iste temporibus odit possimus qui? Omnis reprehenderit eius ex, asperiores soluta non
+                            culpa iste suscipit, dolore, maiores voluptates dicta.</p>
+                        <div class="vehicle-info">
+                            <p class="font-md font-simibold">Vehicle ID: {{vehicleData.vehicleID}}</p>
+                            <p class="font-md font-simibold">Make: {{vehicleData.make}}</p>
+                            <p class="font-md font-simibold">Model: {{vehicleData.model}}</p>
+                            <p class="font-md font-simibold">Plate Number: {{vehicleData.plateNumber}}</p>
+                            <p class="font-md font-simibold">Mile Age: {{vehicleData.mileage}}</p>
+                            <p class="font-md font-simibold">Year: {{vehicleData.year}}</p>
+                        </div>
+
+                        <div class="rating-container mb-3">
+                            <div class="stars font-md"><span class="font-simibold">Rating: </span>
+                                @for (star of [1,2,3,4,5]; track star) {
+                                <i class="fas fa-star"></i>
+                                }
+                            </div>
+                        </div>
+                        <div class="price-section mb-4 d-flex justify-content-between align-items-center">
+                            <div class="current-price">${{vehicleData.rentalPricePerDay}}</div>
+                            <div class="booking">
+                                <app-btn-booking [routerLink]="['/customer/booking']"></app-btn-booking>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mt-4">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="container-fluid">
+            <h2 class="text-center font-xxl font-bold vehicles-category">Vehicles in category: {{ selectedCategory?.name }}</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4" *ngFor="let category of categoriesById">
+                    <app-vehicle-card [transferSpacificVehicles]="category"></app-vehicle-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

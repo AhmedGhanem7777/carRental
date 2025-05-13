@@ -1,0 +1,50 @@
+<app-navbar [navbarBg]="true"></app-navbar>
+<section class="booking-container">
+    <h2 class="font-bold font-xl">Vehicle Booking</h2>
+    <form (ngSubmit)="onSubmit()" #bookingForm="ngForm">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" [(ngModel)]="bookingData.name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" [(ngModel)]="bookingData.phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate" [(ngModel)]="bookingData.startDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime" name="startTime" [(ngModel)]="bookingData.startTime" required>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" name="endDate" [(ngModel)]="bookingData.endDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime" name="endTime" [(ngModel)]="bookingData.endTime" required>
+        </div>
+
+        <button type="submit" [disabled]="!bookingForm.form.valid || isLoading">
+            <ng-container *ngIf="!isLoading; else loading">
+                Book Now
+            </ng-container>
+            <ng-template #loading>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </ng-template>
+        </button>
+    </form>
+
+    <div *ngIf="bookingSuccess" class="success-message">
+        Booking successful! Your reference number is: {{referenceNumber}}
+    </div>
+</section>
+<app-footer></app-footer>

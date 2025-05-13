@@ -1,0 +1,21 @@
+<section class="verify-email">
+    <div class="container m-auto" #containerOverflow>
+        <div class="verify">
+            <h1>Check your email</h1>
+            <p class="mb-5 text-white font-sm text-center">We've sent a verification code to your email address</p>
+            <form>
+                <div class="inp">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Enter Verification Code">
+                </div>
+                <button>Verify Email</button>
+                <div class="back-link ">
+                    <a [routerLink]="['../forgot-pass']">
+                        <i class="fas fa-chevron-left me-2"></i>
+                        Back to forgot password
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

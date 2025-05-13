@@ -1,0 +1,21 @@
+
+  
+.categories{
+  padding: 100px 0;
+}
+
+.category-card .category-info img{
+  width: 20%;
+}
+.category-card .category-image img{
+  width: 100%;
+}
+
+
+.view-all{
+  text-decoration: underline;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}

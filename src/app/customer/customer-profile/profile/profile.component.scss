@@ -1,0 +1,290 @@
+
+.animation {
+  animation: fadeIn 0.5s ease-in;
+  padding: 1rem;
+  margin-top: 80px;
+}
+
+.user-info-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto !important;
+  transition: all 0.3s ease;
+}
+
+.user-info-container:hover {
+  box-shadow: rgba(17, 12, 46, 0.25) 0px 48px 100px 0px;
+  transform: translateY(-5px);
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #3498db;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  position: relative;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.user-status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background-color: #e74c3c;
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  
+  &.verified {
+    background-color: #2ecc71;
+  }
+}
+
+.user-details {
+  display: grid;
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  
+  &:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
+  }
+
+  input, select {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    
+    &:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+  }
+}
+
+.edit-inputs {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  flex-wrap: wrap;
+
+  input {
+    flex: 1;
+    min-width: 150px;
+  }
+}
+
+.label {
+  font-weight: 600;
+  color: #2c3e50;
+  min-width: 120px;
+}
+
+.value {
+  color: #34495e;
+  word-break: break-word;
+}
+
+.update-button-container {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.update-button, .change-pass {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  min-width: 140px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.update-button {
+  &.save {
+    background-color: #2ecc71;
+    
+    &:hover {
+      background-color: #27ae60;
+    }
+  }
+
+  &.cancel {
+    background-color: #e74c3c;
+    
+    &:hover {
+      background-color: #c0392b;
+    }
+  }
+}
+
+.change-pass {
+  background-color: #34db53;
+
+  &:hover {
+    background-color: #29b957;
+  }
+}
+
+@media (max-width: 768px) {
+  .animation {
+    padding: 0.5rem;
+  }
+
+  .user-info-container {
+    margin: 0.5rem auto !important;
+    padding: 1rem;
+  }
+  
+  .user-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    
+    input, select {
+      width: 100%;
+      min-width: unset;
+    }
+  }
+  
+  .label {
+    min-width: unset;
+    margin-bottom: 0.25rem;
+  }
+
+  .edit-inputs {
+    width: 100%;
+    flex-direction: column;
+    
+    input {
+      width: 100%;
+      min-width: unset;
+    }
+  }
+
+  .update-button-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .edit-buttons {
+    flex-direction: column;
+  }
+
+  .update-button, .change-pass {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-info-container {
+    padding: 0.75rem;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-status {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

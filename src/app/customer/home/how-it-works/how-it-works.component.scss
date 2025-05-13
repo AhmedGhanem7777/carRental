@@ -1,0 +1,39 @@
+.how-it-works {
+    padding: 5rem 5%;
+    background-color: #e2e2e23f;
+  }
+  
+  .steps-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .step-card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(65, 63, 63, 0.085);
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .step-number {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: #00bcd4;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }

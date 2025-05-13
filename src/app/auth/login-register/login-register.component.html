@@ -1,0 +1,103 @@
+
+
+<div class="signIn-signUp">
+    <div class="container m-auto" #containerOverflow>
+        <div class="sign-in">
+            <h1 (click)="signInIsActive()">Sign in</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+                <div class="inp">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input formControlName="email" type="email" placeholder="Enter Your Email">
+                </div>
+                <div class="inp">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" placeholder="Password" formControlName="password"
+                        [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" />
+                    <!-- <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+                        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+                        <small *ngIf="loginForm.get('password')?.errors?.['pattern']">
+                            Password must include lowercase letter, number, and special character
+                        </small>
+                    </div> -->
+                </div>
+                <div class="check-box">
+                    <div class="check">
+                        <input type="checkbox">
+                        <span>Remember Me</span>
+                    </div>
+                    <a class="forgot" [routerLink]="['/auth/forgot-pass']">Forgot Password?</a>
+                </div>
+                <button>Login</button>
+            </form>
+        </div>
+
+        <div class="sign-up" #signUpDiv>
+            <h1 (click)="signUpIsActive()">Sign up</h1>
+            <form (ngSubmit)="register(registerForm)" [formGroup]="registerForm">
+                <div class="profile-image-wrapper">
+                    <div class="upload-image-container">
+                        <label class="upload-image" [class.has-image]="imageUrl">
+                            @if (!imageUrl) {
+                            <div class="upload-placeholder">
+                                <i class="fa-solid fa-upload"></i>
+                                <p>Upload Image</p>
+                            </div>
+                            } @else {
+                            <img [src]="imageUrl" alt="Profile preview" class="preview-image">
+                            }
+                            <input type="file" class="d-none" accept="image/*" (change)="onFileSelected($event)">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="inp">
+                        <i class="fa-solid fa-user"></i>
+                        <input formControlName="firstName" type="text" placeholder="First Name">
+                    </div>
+                    <div class="inp">
+                        <i class="fa-solid fa-user"></i>
+                        <input formControlName="lastName" type="text" placeholder="Last Name">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="inp">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input formControlName="email" type="email" placeholder="Email">
+                    </div>
+                    <div class="inp">
+                        <i class="fa-solid fa-id-card"></i>
+                        <input formControlName="driverLicenseNumber" type="text" placeholder="Driver License Number">
+                    </div>
+                </div>
+
+                
+                <div class="inp">
+                    <i class="fa fa-phone"></i>
+                    <input type="text" placeholder="Phone Number" formControlName="phoneNumber"
+                        [ngClass]="{'is-invalid': registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched}" />
+                    <!-- <div class="error"
+                        *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
+                        <small *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone number is required</small>
+                        <small *ngIf="registerForm.get('phoneNumber')?.errors?.['pattern']">Phone must start with 010, 011, 012, or 015 and be 11 digits</small>
+                    </div> -->
+                </div>
+
+                <div class="inp">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" placeholder="Password" formControlName="password"
+                        [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched}" />
+                    <!-- <div class="error"
+                        *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+                        <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</small>
+                        <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters</small>
+                        <small *ngIf="registerForm.get('password')?.errors?.['pattern']">Password must include lowercase letter, number, and special character</small>
+                    </div> -->
+                </div>
+
+                <button>Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>

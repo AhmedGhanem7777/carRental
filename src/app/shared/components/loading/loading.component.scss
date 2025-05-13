@@ -1,0 +1,146 @@
+
+
+.loading {
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0f1b;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.text-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.svg-frame {
+  position: relative;
+  width: min(300px, 80vw);
+  height: min(300px, 80vw);
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg-frame svg {
+  position: absolute;
+  transition: .5s;
+  z-index: calc(1 - (0.2 * var(--j)));
+  transform-origin: center;
+  width: min(344px, 90vw);
+  height: min(344px, 90vw);
+  fill: none;
+}
+
+.svg-frame:hover svg {
+  transform: rotate(-80deg) skew(30deg) translateX(calc(45px * var(--i))) translateY(calc(-35px * var(--i)));
+}
+
+#out2 {
+  animation: rotate16 7s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes rotate16 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wrapper {
+  width: clamp(100px, 30vw, 200px);
+  height: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.circle {
+  width: clamp(10px, 3vw, 20px);
+  height: clamp(10px, 3vw, 20px);
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  left: 15%;
+  transform-origin: 50%;
+  animation: circle7124 .5s alternate infinite ease;
+}
+
+@keyframes circle7124 {
+  0% {
+    top: 60px;
+    height: 5px;
+    border-radius: 50px 50px 25px 25px;
+    transform: scaleX(1.7);
+  }
+  40% {
+    height: clamp(10px, 3vw, 20px);
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0%;
+  }
+}
+
+.circle:nth-child(2) {
+  left: 45%;
+  animation-delay: .2s;
+}
+
+.circle:nth-child(3) {
+  left: auto;
+  right: 15%;
+  animation-delay: .3s;
+}
+
+.shadow {
+  width: clamp(10px, 3vw, 20px);
+  height: 4px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.3);
+  position: absolute;
+  top: 62px;
+  transform-origin: 50%;
+  z-index: -1;
+  left: 15%;
+  filter: blur(1px);
+  animation: shadow046 .5s alternate infinite ease;
+}
+
+@keyframes shadow046 {
+  0% {
+    transform: scaleX(1.5);
+  }
+  40% {
+    transform: scaleX(1);
+    opacity: .7;
+  }
+  100% {
+    transform: scaleX(.2);
+    opacity: .4;
+  }
+}
+
+.shadow:nth-child(4) {
+  left: 45%;
+  animation-delay: .2s
+}
+
+.shadow:nth-child(5) {
+  left: auto;
+  right: 15%;
+  animation-delay: .3s;
+}

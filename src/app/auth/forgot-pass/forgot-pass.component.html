@@ -1,0 +1,22 @@
+<section class="forgot-pass">
+    <div class="container m-auto" #containerOverflow>
+        <div class="forgot">
+            <h1>Forgot Your Password</h1>
+            <p class="mb-5 text-white font-sm text-center">Enter your email address and we'll send you instructions to
+                reset your password.</p>
+            <form>
+                <div class="inp">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" placeholder="Enter Your Email">
+                </div>
+                <button>Reset Password</button>
+                <div class="back-link ">
+                    <a [routerLink]="['../login-register']">
+                        <i class="fas fa-chevron-left me-2"></i>
+                        Back to login
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

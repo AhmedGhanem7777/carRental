@@ -1,0 +1,25 @@
+<section class="reset-pass">
+    <div class="container m-auto" #containerOverflow>
+        <div class="reset">
+            <h1>Create New Password</h1>
+            <p class="mb-5 text-white font-sm text-center">This password should be different from the previous password.</p>
+            <form>
+                <div class="inp">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Enter New Password">
+                </div>
+                <div class="inp">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Confirm New Password">
+                </div>
+                <button>Reset Password</button>
+                <div class="back-link ">
+                    <a [routerLink]="['../login-register']">
+                        <i class="fas fa-chevron-left me-2"></i>
+                        Back to login
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,30 @@
+<app-navbar [navbarBg]="true"></app-navbar>
+<section class="categories">
+    <div *ngIf="_IsLoadingService.isLoading()" class="col-12 text-center">
+        <app-loading></app-loading>
+    </div>
+    <div class="container py-5 mt-5" *ngIf="!_IsLoadingService.isLoading()">
+        <div class="row justify-content-center g-4">
+            <div class="col-12">
+                <div class="title py-4 py-md-5">
+                    <h2 class="position-relative text-center font-md main-color">Search by category</h2>
+                </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 fade-in" *ngFor="let category of categories; let i = index"
+                [style.animation-delay]="(i * 100) + 'ms'">
+                <a [routerLink]="['/customer/categories/category-details', category.id]"
+                    class="content d-flex flex-column justify-content-center align-items-center">
+                    <div class="category-box p-2">
+                        <div class="category-image">
+                            <img [src]="category.imagePath" [alt]="category.name">
+                        </div>
+                    </div>
+                    <div class="category-name">
+                        <h3 class="text-center my-2 my-md-3">{{category.name}}</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

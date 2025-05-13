@@ -1,0 +1,25 @@
+<app-navbar [navbarBg]="true"></app-navbar>
+<div class="category-details">
+    <div *ngIf="_IsLoadingService.isLoading()" class="col-12 text-center">
+        <app-loading></app-loading>
+    </div>
+
+
+    <div class="container-fluied py-5 mb-5" *ngIf="!_IsLoadingService.isLoading()">
+        <h1 *ngIf="categories?.length > 0" class="text-center font-xxl font-bold">All Vehicles By Category</h1>
+        <div *ngIf="categories?.length > 0">
+            <div class="row justify-content-center px-2 gy-3">
+                <div class="col-md-4" *ngFor="let category of categories; let i = index">
+                    <app-vehicle-card [transferSpacificVehicles]="category"></app-vehicle-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="noVehicles d-flex justify-content-center align-items-center"
+            *ngIf="categories?.length <= 0 && !_IsLoadingService.isLoading()">
+            <!-- <img src="assets/images/newProfileImage.jpg" alt="no product found" class="img-fluid"> -->
+            <h2 class="mt-5 font-xxl font-bold text-white">{{noVehicles}}</h2>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

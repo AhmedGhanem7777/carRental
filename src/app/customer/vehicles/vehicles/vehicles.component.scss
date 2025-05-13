@@ -1,0 +1,32 @@
+.animation{
+     animation: fadeIn 0.5s ease-in;
+}
+.top-slider{
+     height: 60vh;
+     background-image: url(../../../../assets/images/MG5_1440X572_01.jpg);
+     background-position: center center;
+     background-size: cover;
+     background-repeat: no-repeat;
+     position: relative;
+}
+.filter-vehicles .nav a{
+     border: 1px solid var(--primary-color);
+     border-radius: 5px;
+     color: #000;
+     cursor: pointer;
+}
+.btn-filter-active{
+     background-color: var(--primary-color);
+     color: #fff;
+}
+
+
+
+@keyframes fadeIn {
+     from {
+         opacity: 0;
+     }
+     to {
+         opacity: 1;
+     }
+ }

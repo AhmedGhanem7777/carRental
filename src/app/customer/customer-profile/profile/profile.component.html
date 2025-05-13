@@ -1,0 +1,84 @@
+<app-navbar [navbarBg]="true"></app-navbar>
+<section>
+    <div *ngIf="_IsLoadingService.isLoading()" class="col-12 text-center">
+        <app-loading></app-loading>
+    </div>
+    <div *ngIf="!_IsLoadingService.isLoading()" class="animation">
+        <div class="user-info-container">
+            <div class="user-header">
+                <div class="profile-image position-relative">
+                    <img [src]="previewImage || userInfo.imagePath || 'assets/images/avatar-profile.jpg'"
+                        class="object-fit-contain" alt="Profile Picture" />
+                    <label class="upload-overlay" *ngIf="isEditing">
+                        <input type="file" (change)="onImageSelected($event)" accept="image/*" hidden />
+                        <span><i class="fa-solid fa-camera-rotate"></i></span>
+                    </label>
+                </div>
+                <div class="user-status" [class.verified]="userInfo.isActive">
+                    {{ userInfo.isActive ? 'Verified' : 'Not Verified' }}
+                </div>
+            </div>
+
+            <div class="user-details">
+                <div class="detail-item">
+                    <span class="label">Username:</span>
+                    <span class="value" *ngIf="!isEditing">{{userInfo.firstName}} {{userInfo.lastName}}</span>
+                    <div class="edit-inputs" *ngIf="isEditing">
+                        <input type="text" [(ngModel)]="userInfo.firstName" placeholder="First Name">
+                        <input type="text" [(ngModel)]="userInfo.lastName" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Email:</span>
+                    <span class="value" *ngIf="!isEditing">{{userInfo.email}}</span>
+                    <input *ngIf="isEditing" type="email" [(ngModel)]="userInfo.email" placeholder="Email">
+                </div>
+                <div class="detail-item">
+                    <span class="label">Phone:</span>
+                    <span class="value" *ngIf="!isEditing">{{userInfo.phoneNumber}}</span>
+                    <input *ngIf="isEditing" type="tel" [(ngModel)]="userInfo.phoneNumber" placeholder="Phone Number">
+                </div>
+                <div class="detail-item">
+                    <span class="label">Driver License:</span>
+                    <span class="value" *ngIf="!isEditing">{{userInfo.driverLicenseNumber}}</span>
+                    <input *ngIf="isEditing" type="text" [(ngModel)]="userInfo.driverLicenseNumber"
+                        placeholder="Driver License Number">
+                </div>
+                <div class="detail-item">
+                    <span class="label">Status:</span>
+                    <span class="value" *ngIf="!isEditing">{{userInfo.isActive ? 'Active' : 'Inactive'}}</span>
+                    <select *ngIf="isEditing" [(ngModel)]="userInfo.isActive" class="form-select">
+                        <option [ngValue]="true">Active</option>
+                        <option [ngValue]="false">Inactive</option>
+                    </select>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Role ID:</span>
+                    <span class="value">{{userInfo.roleId}}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Member Since:</span>
+                    <span class="value">{{userInfo.createdAt | date:'mediumDate'}}</span>
+                </div>
+            </div>
+
+            <div class="update-button-container">
+                <button *ngIf="!isEditing" class="change-pass" [routerLink]="['./change-pass']">
+                    Change Password
+                </button>
+                <button *ngIf="!isEditing" class="update-button" (click)="toggleEdit()">
+                    Edit Profile
+                </button>
+                <div *ngIf="isEditing" class="edit-buttons">
+                    <button class="update-button save" (click)="updateUserProfile()">
+                        Save Changes
+                    </button>
+                    <button class="update-button cancel" (click)="toggleEdit()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<section>
+    <div *ngIf="_IsLoadingService.isLoading()" class="col-12 text-center">
+        <app-loading></app-loading>
+    </div>
+    <div class="animation" *ngIf="!_IsLoadingService.isLoading()">
+        <div class="top-slider p-5">
+            <app-top-slider></app-top-slider>
+        </div>
+        <div class="vehicles mt-5">
+            <div class="container-fluid py-5">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="head">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a [routerLink]="['../home']">Home</a></li>
+                                    <li class="breadcrumb-item cursor-pointer font-bold">Vehicles</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    @for (specificVehicle of allVehicles; track $index) {
+                    <div class="col-xxl-4 col-lg-6">
+                        <div class="fade-in" [style.animation-delay]="($index * 0.2) + 's'">
+                            <app-vehicle-card [transferSpacificVehicles]="specificVehicle"></app-vehicle-card>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

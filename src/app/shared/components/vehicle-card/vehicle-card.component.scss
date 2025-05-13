@@ -1,0 +1,185 @@
+.vehicle-card {
+    padding: 20px;
+    border: 1px solid #b4afaf8f;
+    border-radius: 10px;
+    box-shadow: 5px 10px 40px #00000042;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    @media (max-width: 768px) {
+        padding: 15px;
+    }
+}
+
+.head-title {
+    @media (max-width: 576px) {
+        .category, .model {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.vehicle-image {
+    @media (min-width: 768px) {
+        width: 50% !important;
+    }
+
+    .hover-scale {
+        transition: transform 0.3s ease;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.vehicle-facilities {
+    margin-top: 20px;
+    gap: 10px;
+
+    @media (max-width: 576px) {
+        justify-content: center !important;
+    }
+
+    .facility {
+        .image-facility img {
+            width: 25px;
+        }
+    }
+}
+
+.btn-save {
+    color: #acacac;
+    font-size: 19px;
+    transition: all 0.3s;
+
+    &:hover {
+        color: #000;
+        font-weight: 600;
+    }
+
+    @media (max-width: 576px) {
+        font-size: 16px;
+    }
+}
+
+.gray {
+    color: #acacac;
+    font-size: 17px;
+}
+
+.btn-booking {
+    border: none;
+    border-radius: 5px;
+    padding: 12px 30px;
+    color: #fff;
+    font-size: 1.1rem;
+    background-color: var(--btn-color);
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: var(--btn-color-hover);
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 576px) {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+// Animations
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes bookmarkWiggle {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease forwards;
+    @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i * 0.1}s;
+        }
+    }
+}
+
+.fade-up {
+    animation: fadeUp 0.5s ease forwards;
+}
+
+.pulse {
+    &:hover {
+        animation: pulse 1s infinite;
+    }
+}
+
+.bounce {
+    &:hover {
+        animation: bounce 1s infinite;
+    }
+}
+
+.bookmark-animation {
+    &:hover {
+        animation: bookmarkWiggle 0.5s ease;
+    }
+}
+
+
+.car-image{
+    width: 300px;
+    height: 220px;
+}

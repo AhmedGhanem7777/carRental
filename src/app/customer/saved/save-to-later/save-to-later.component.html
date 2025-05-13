@@ -1,0 +1,91 @@
+<app-navbar [navbarBg]="true"></app-navbar>
+<section class="py-5">
+    <div *ngIf="_IsLoadingService.isLoading()" class="col-12 text-center py-3">
+        <app-loading></app-loading>
+    </div>
+
+    <div class="container rounded-4" *ngIf="!_IsLoadingService.isLoading()">
+        <div class="cart content my-3 p-3">
+            <div class="row">
+                <div class="col-12">
+                    <div class="head">
+                        <div class="row flex-column flex-md-row">
+                            <div class="col-12 col-md-6 mb-3 mb-md-0">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <app-go-back></app-go-back>
+                                    </div>
+                                    <div class="text d-flex align-items-center">
+                                        <h3 class="my-1 mx-2 font-bold font-lg">Saved <i
+                                                class="fa-solid fa-car-side"></i></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="cartDetails?.data && cartDetails.data.length > 0">
+                    <div class="col-12 py-3 after-product position-relative"
+                        *ngFor="let vehicle of cartDetails.data">
+                        <div class="row align-items-center">
+                            <div class="col-4 col-md-2 mb-3 mb-md-0">
+                                <div class="image overflow-hidden w-100">
+                                    <img [routerLink]="['/customer/vehicles/vehicle-details',vehicle.vehicleId]" [src]="vehicle?.vehicleData?.imagePath" class="w-100 rounded-5 img-border cursor-pointer"
+                                        [alt]="vehicle?.vehicleId">
+                                </div>
+                            </div>
+                            <div class="col-8 col-md-4 mb-3 mb-md-0">
+                                <div class="info">
+                                    <a [routerLink]="['/productdetails',vehicle?.vehicleId]"
+                                        class="font-bold font-md second-color">{{vehicle?.vehicleData?.info | formatInfo }}</a>
+                                    <!-- <h4 class="mt-2">Rate:<span class="ms-2"><i
+                                                class="fa-solid fa-star rating-color"></i>
+                                            {{vehicle?.product?.ratingsAverage}}</span></h4> -->
+                                    <!-- <h4>Price:<span class="ms-2">EGP {{vehicle.price}}</span></h4> -->
+                                    <!-- <p class="mb-0">{{vehicle?.product?.category?.name}} |
+                                        {{vehicle?.product?.brand?.name}} |
+                                        <span>Available</span>
+                                    </p> -->
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-2 mt-3 mt-md-0">
+                                <div>
+                                    <div class="count font-md p-1">
+                                        <button class="btn-plus"
+                                            (click)="updateItemCount(vehicle.vehicleId,vehicle.quantity-1)">-</button>
+                                        <span class="mx-3">{{vehicle?.quantity}}</span>
+                                        <button class="btn-minus"
+                                            (click)="updateItemCount(vehicle.vehicleId,vehicle.quantity+1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2 mt-3 mt-md-0 text-end text-md-center">
+                                <div class="remove-product">
+                                    <div (click)="removeItem(currentUserId,vehicle.vehicleId)"
+                                        class="icon-remove d-flex justify-content-center align-items-center cursor-pointer ms-auto me-md-auto">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <div class="my-3">
+                            <button (click)="onClearCart()" class="btn btn-danger remove-all-vehicles"><i class="fa-solid fa-trash-can me-2"></i>
+                                Clear All Products</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!cartDetails.data || cartDetails.data.length === 0"
+                    class="d-flex justify-content-center align-items-center">
+                    <div class="my-5 text-center">
+                        <p class="mb-3">There are not vehicles yet.</p>
+                        <button [routerLink]="['/customer/vehicles']" class="btn-add-vehicle-fav">Add your first
+                            vehicle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>
